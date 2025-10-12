@@ -1,1 +1,8 @@
-<p>register works!</p>
+<h2>Registro</h2>
+<div>{{ message }}</div>
+<form (submit)="register(); $event.preventDefault()">
+  <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
+  <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
+  <button type="submit">Registrarse</button>
+</form>
+<a routerLink="/login">Login</a>

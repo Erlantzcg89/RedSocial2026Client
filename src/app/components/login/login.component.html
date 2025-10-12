@@ -1,1 +1,8 @@
-<p>login works!</p>
+<h2>Login</h2>
+<div>{{ message }}</div>
+<form (submit)="login(); $event.preventDefault()">
+  <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
+  <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
+  <button type="submit">Ingresar</button>
+</form>
+<a routerLink="/register">Registrarse</a>
