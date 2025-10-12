@@ -1,10 +1,10 @@
-<h2>Home</h2>
+<h2>Inicio</h2>
 
-<!-- Botón para llamar al backend -->
-<button (click)="runTest()">Probar API</button>
+<p>{{ message }}</p>
 
-<!-- Mostrar mensaje recibido -->
-<div>{{ testMessage }}</div>
+<button (click)="loadTestMessage()">Probar conexión</button>
 
-<!-- Navegación -->
-<a routerLink="/login">Login</a> | <a routerLink="/register">Register</a>
+<nav>
+  <a routerLink="/login">Ir al login</a> |
+  <a routerLink="/register">Registrarse</a>
+</nav>

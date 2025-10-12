@@ -43,15 +43,15 @@ export class LoginComponent {
 
           // Manejo detallado por código de estado
           if (err.status === 401) {
-            this.message = 'Credenciales inválidas';
+            this.message = '⚠️ Credenciales inválidas';
           } else if (err.status === 403) {
-            this.message = 'Acceso denegado. Verifica tus credenciales o permisos';
+            this.message = '🚫 Acceso denegado. Verifica tus credenciales o permisos';
           } else if (err.status === 0) {
-            this.message = 'No se puede conectar con el servidor';
+            this.message = '❌ No se puede conectar con el servidor';
           } else if (err.error && err.error.message) {
             this.message = err.error.message;
           } else {
-            this.message = 'Error desconocido en el servidor';
+            this.message = '⚠️ Error desconocido en el servidor';
           }
         }
       });
