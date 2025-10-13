@@ -31,7 +31,7 @@ export class RegisterComponent {
         next: (res) => {
           this.message = 'Usuario registrado exitosamente ✅';
           // redirige al login después de registrarse
-          setTimeout(() => this.router.navigate(['/login']), 1000);
+          setTimeout(() => this.router.navigate(['/login']), 2000);
         },
         error: (err) => {
           console.error('Error en registro:', err);
