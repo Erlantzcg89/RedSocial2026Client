@@ -1,13 +1,16 @@
 <div class="container">
-  <h2>Login</h2>
+  <div class="login-inner">
 
-  <div class="message" *ngIf="message">{{ message }}</div>
+    <div class="message" *ngIf="message">{{ message }}</div>
 
-  <form (submit)="login(); $event.preventDefault()">
-    <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-    <button type="submit">Ingresar</button>
-  </form>
+    <form (submit)="login(); $event.preventDefault()">
+      <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Login</button>
+    </form>
 
-  <a routerLink="/register">Registrarse</a>
+    <a routerLink="/register">Recordar la contraseña</a>
+    <a routerLink="/register">Registrarse</a>
+
+  </div>
 </div>

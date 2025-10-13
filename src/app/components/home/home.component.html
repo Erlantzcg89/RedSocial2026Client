@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Inicio</h2>
+
 
   <button (click)="loadTestMessage()" [disabled]="loading">
     {{ loading ? 'Conectando...' : 'Probar conexión' }}
@@ -7,8 +7,8 @@
 
   <p *ngIf="message">{{ message }}</p>
 
-  <nav>
+  <!-- <nav>
     <a routerLink="/login">Ir al login</a> |
     <a routerLink="/register">Registrarse</a>
-  </nav>
+  </nav> -->
 </div>
