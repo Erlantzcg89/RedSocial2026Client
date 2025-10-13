@@ -1,12 +1,14 @@
-<h2>Inicio</h2>
+<div class="container">
+  <h2>Inicio</h2>
 
-<button (click)="loadTestMessage()" [disabled]="loading">
-  {{ loading ? 'Conectando...' : 'Probar conexión' }}
-</button>
+  <button (click)="loadTestMessage()" [disabled]="loading">
+    {{ loading ? 'Conectando...' : 'Probar conexión' }}
+  </button>
 
-<p *ngIf="message">{{ message }}</p>
+  <p *ngIf="message">{{ message }}</p>
 
-<nav>
-  <a routerLink="/login">Ir al login</a> |
-  <a routerLink="/register">Registrarse</a>
-</nav>
+  <nav>
+    <a routerLink="/login">Ir al login</a> |
+    <a routerLink="/register">Registrarse</a>
+  </nav>
+</div>

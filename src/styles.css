@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+/* 🎨 Paleta global basada en tonos rojos */
+:root {
+  --primary-color: #d32f2f;
+  --primary-hover: #b71c1c;
+  --background-light: #fff5f5;
+  --text-dark: #333;
+  --text-light: #fff;
+  --border-radius: 8px;
+  --transition: 0.3s ease;
+}
+
+/* 🌍 Estilos globales */
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  color: var(--primary-color);
+  text-align: center;
+}
+
+/* 🧠 Layout general */
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔘 Botones comunes */
+button {
+  width: 100%;
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* 🧾 Formularios */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+/* 🔗 Enlaces */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
