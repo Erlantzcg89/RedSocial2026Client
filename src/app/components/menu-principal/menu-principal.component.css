@@ -1,0 +1,31 @@
+.menu-principal {
+  width: 100%;
+  background-color: #d32f2f; /* color primario */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* siempre encima */
+}
+
+.menu-principal a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu-principal a:hover {
+  color: #fff5f5;
+}
+
+/* Añadimos padding superior al contenido debajo del menú */
+body, .router-outlet {
+  padding-top: 60px; /* ajusta según la altura del menú */
+}
