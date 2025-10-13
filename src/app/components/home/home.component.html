@@ -1,8 +1,10 @@
 <h2>Inicio</h2>
 
-<p>{{ message }}</p>
+<button (click)="loadTestMessage()" [disabled]="loading">
+  {{ loading ? 'Conectando...' : 'Probar conexión' }}
+</button>
 
-<button (click)="loadTestMessage()">Probar conexión</button>
+<p *ngIf="message">{{ message }}</p>
 
 <nav>
   <a routerLink="/login">Ir al login</a> |
