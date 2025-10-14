@@ -1,13 +1,13 @@
 <div class="container">
   <div class="login-inner">
 
-    <!-- 🔒 Si el usuario está logueado -->
+    <!-- 🔒 Usuario logueado -->
     <div *ngIf="loggedInUser; else loginForm">
       <p>Bienvenido, <strong>{{ loggedInUser }}</strong></p>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
 
-    <!-- 🧾 Si NO está logueado -->
+    <!-- 🧾 Usuario no logueado -->
     <ng-template #loginForm>
       <div class="message" *ngIf="message">{{ message }}</div>
 

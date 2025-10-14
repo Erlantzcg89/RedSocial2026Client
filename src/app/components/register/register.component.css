@@ -13,6 +13,16 @@ input {
 
 button {
   margin-top: 10px;
+  background: #fff;
+  color: var(--text-dark);
+  border: 1px solid var(--text-dark);
+  transition: background var(--transition), color var(--transition);
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: var(--text-light);
+  border-color: var(--primary-color);
 }
 
 .message {

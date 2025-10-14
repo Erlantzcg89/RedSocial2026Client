@@ -15,20 +15,11 @@ export class LoginComponent {
   username = '';
   password = '';
   message = '';
-  loggedInUser: string | null = null;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  loggedInUser: string | null = localStorage.getItem('username');
 
-  ngOnInit() {
-    // Cargar sesión activa si existe
-    const storedUser = localStorage.getItem('username');
-    const storedToken = localStorage.getItem('token');
-    if (storedUser && storedToken) {
-      this.loggedInUser = storedUser;
-    }
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.user$.subscribe(user => this.loggedInUser = user);
   }
 
   login() {
@@ -39,38 +30,21 @@ export class LoginComponent {
 
     this.authService.login({ username: this.username, password: this.password })
       .subscribe({
-        next: (res) => {
-          if (res?.token) {
-            // Guardar sesión local
-            localStorage.setItem('token', res.token);
-            localStorage.setItem('username', this.username);
-
-            this.loggedInUser = this.username;
-            this.message = 'Inicio de sesión exitoso ✅';
-            this.router.navigate(['/mi-perfil']);
-          } else {
-            this.message = 'Respuesta inesperada del servidor';
-          }
+        next: () => {
+          this.message = 'Inicio de sesión exitoso ✅';
+          this.router.navigate(['/mi-perfil']);
         },
-        error: (err) => {
-          console.error('Error en login:', err);
-          if (err.status === 401) {
-            this.message = '⚠️ Credenciales inválidas';
-          } else if (err.status === 403) {
-            this.message = '🚫 Acceso denegado';
-          } else if (err.status === 0) {
-            this.message = '❌ No se puede conectar con el servidor';
-          } else {
-            this.message = '⚠️ Error desconocido';
-          }
+        error: err => {
+          if (err.status === 401) this.message = '⚠️ Credenciales inválidas';
+          else if (err.status === 403) this.message = '🚫 Acceso denegado';
+          else if (err.status === 0) this.message = '❌ No se puede conectar con el servidor';
+          else this.message = '⚠️ Error desconocido';
         }
       });
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    this.loggedInUser = null;
+    this.authService.logout();
     this.username = '';
     this.password = '';
     this.message = '';

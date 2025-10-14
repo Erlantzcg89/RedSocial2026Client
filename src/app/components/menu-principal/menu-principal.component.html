@@ -1,5 +1,6 @@
 <nav class="menu-principal">
   <a routerLink="/home">Inicio</a>
-  <a routerLink="/mi-perfil">Mi Perfil</a>
-  <a routerLink="/foro">Foro</a>
+  <a *ngIf="loggedIn" routerLink="/mi-perfil">Mi Perfil</a>
+  <a *ngIf="loggedIn" routerLink="/foro">Foro</a>
+  <a *ngIf="loggedIn" routerLink="/test">Test</a>
 </nav>
