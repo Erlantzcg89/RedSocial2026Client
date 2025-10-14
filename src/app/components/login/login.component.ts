@@ -73,7 +73,7 @@ export class LoginComponent {
     this.loggedInUser = null;
     this.username = '';
     this.password = '';
-    this.message = 'Sesión cerrada correctamente';
+    this.message = '';
     this.router.navigate(['/home']);
   }
 }
