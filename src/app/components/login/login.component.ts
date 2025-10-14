@@ -34,7 +34,7 @@ export class LoginComponent {
           if (res?.token) {
             localStorage.setItem('token', res.token);
             this.message = 'Inicio de sesión exitoso ✅';
-            this.router.navigate(['/home']); // puedes cambiar la ruta si lo deseas
+            this.router.navigate(['/mi-perfil']); // puedes cambiar la ruta si lo deseas
           } else {
             this.message = 'Respuesta inesperada del servidor';
           }
