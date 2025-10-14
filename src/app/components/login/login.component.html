@@ -1,16 +1,25 @@
 <div class="container">
   <div class="login-inner">
 
-    <div class="message" *ngIf="message">{{ message }}</div>
+    <!-- 🔒 Si el usuario está logueado -->
+    <div *ngIf="loggedInUser; else loginForm">
+      <p>👋 Bienvenido, <strong>{{ loggedInUser }}</strong></p>
+      <button (click)="logout()">Cerrar sesión</button>
+    </div>
 
-    <form (submit)="login(); $event.preventDefault()">
-      <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-      <button type="submit">Login</button>
-    </form>
+    <!-- 🧾 Si NO está logueado -->
+    <ng-template #loginForm>
+      <div class="message" *ngIf="message">{{ message }}</div>
 
-    <a routerLink="/register">Recordar la contraseña</a>
-    <a routerLink="/register">Registrarse</a>
+      <form (submit)="login(); $event.preventDefault()">
+        <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Login</button>
+      </form>
+
+      <a routerLink="/recordar">Recordar contraseña</a>
+      <a routerLink="/register">Registrarse</a>
+    </ng-template>
 
   </div>
 </div>

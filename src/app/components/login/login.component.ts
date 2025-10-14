@@ -15,14 +15,23 @@ export class LoginComponent {
   username = '';
   password = '';
   message = '';
+  loggedInUser: string | null = null;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
 
+  ngOnInit() {
+    // Cargar sesión activa si existe
+    const storedUser = localStorage.getItem('username');
+    const storedToken = localStorage.getItem('token');
+    if (storedUser && storedToken) {
+      this.loggedInUser = storedUser;
+    }
+  }
+
   login() {
-    // Validar campos vacíos
     if (!this.username || !this.password) {
       this.message = 'Por favor, completa todos los campos';
       return;
@@ -32,29 +41,39 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           if (res?.token) {
+            // Guardar sesión local
             localStorage.setItem('token', res.token);
+            localStorage.setItem('username', this.username);
+
+            this.loggedInUser = this.username;
             this.message = 'Inicio de sesión exitoso ✅';
-            this.router.navigate(['/mi-perfil']); // puedes cambiar la ruta si lo deseas
+            this.router.navigate(['/mi-perfil']);
           } else {
             this.message = 'Respuesta inesperada del servidor';
           }
         },
         error: (err) => {
           console.error('Error en login:', err);
-
-          // Manejo detallado por código de estado
           if (err.status === 401) {
             this.message = '⚠️ Credenciales inválidas';
           } else if (err.status === 403) {
-            this.message = '🚫 Acceso denegado. Verifica tus credenciales o permisos';
+            this.message = '🚫 Acceso denegado';
           } else if (err.status === 0) {
             this.message = '❌ No se puede conectar con el servidor';
-          } else if (err.error && err.error.message) {
-            this.message = err.error.message;
           } else {
-            this.message = '⚠️ Error desconocido en el servidor';
+            this.message = '⚠️ Error desconocido';
           }
         }
       });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    this.loggedInUser = null;
+    this.username = '';
+    this.password = '';
+    this.message = 'Sesión cerrada correctamente';
+    this.router.navigate(['/home']);
   }
 }

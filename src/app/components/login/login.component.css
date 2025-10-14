@@ -1,26 +1,24 @@
-/* Contenido interno del login */
 .login-inner {
-  max-width: 200px;       
-  margin-left: auto;       
-  text-align: right;       
-  font-size: 0.85rem;     
+  max-width: 200px;
+  margin-left: auto;
+  text-align: right;
+  font-size: 0.85rem;
 }
 
-/* Formulario interno */
 .login-inner form {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;  
+  align-items: flex-end;
 }
 
 .login-inner input {
   width: 100%;
   margin-bottom: 6px;
-  font-size: 0.8rem;      
+  font-size: 0.8rem;
   padding: 6px 8px;
 }
 
-/* Botón de login: blanco con borde y texto oscuro */
+/* Botón blanco con borde */
 .login-inner button {
   width: 100%;
   background: #fff;
@@ -38,21 +36,13 @@
   border-color: var(--primary-color);
 }
 
-.login-inner button:disabled {
-  background: #ccc;
-  color: #666;
-  border-color: #999;
-  cursor: not-allowed;
-}
-
-/* Mensaje de error o info */
 .login-inner .message {
   margin-bottom: 8px;
   font-weight: 500;
   color: var(--primary-color);
 }
 
-/* Enlace Registrarse centrado */
+/* Enlaces centrados */
 .login-inner a {
   display: block;
   text-align: center;
