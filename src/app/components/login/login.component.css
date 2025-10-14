@@ -1,10 +1,36 @@
-.login-inner {
-  max-width: 200px;
-  margin-left: auto;
-  text-align: right;
-  font-size: 0.85rem;
+/* Contenedor principal: flexbox */
+.login-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: flex-start; /* altura = altura del formulario */
+  background: white;
 }
 
+/* Imagen a la izquierda ajustada a la altura del formulario */
+.login-image {
+  margin-right: 10px; /* separa la imagen del formulario */
+}
+
+.login-image img {
+  display: block;
+  height: 100%; /* altura = altura del contenedor */
+  width: auto;  /* mantiene proporción */
+  object-fit: cover;
+}
+
+/* Formulario a la derecha con fondo blanco */
+.login-inner {
+  max-width: 200px;
+  margin-left: auto;       /* empuja el formulario a la derecha */
+  text-align: right;
+  font-size: 0.85rem;
+  padding: 20px;           /* espacio interno */
+  background-color: white; /* fondo blanco */
+}
+
+/* Formulario interno */
 .login-inner form {
   display: flex;
   flex-direction: column;
