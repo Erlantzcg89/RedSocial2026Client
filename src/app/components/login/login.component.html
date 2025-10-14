@@ -3,7 +3,7 @@
 
     <!-- 🔒 Si el usuario está logueado -->
     <div *ngIf="loggedInUser; else loginForm">
-      <p>👋 Bienvenido, <strong>{{ loggedInUser }}</strong></p>
+      <p>Bienvenido, <strong>{{ loggedInUser }}</strong></p>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
 
@@ -17,7 +17,6 @@
         <button type="submit">Login</button>
       </form>
 
-      <a routerLink="/recordar">Recordar contraseña</a>
       <a routerLink="/register">Registrarse</a>
     </ng-template>
 
