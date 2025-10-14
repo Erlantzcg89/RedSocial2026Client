@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, JwtPayload } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +16,11 @@ export class LoginComponent {
   password = '';
   message = '';
 
-  loggedInUser: string | null = localStorage.getItem('username');
+  // Guardamos el usuario logueado completo (JwtPayload)
+  loggedInUser: JwtPayload | null = null;
 
   constructor(private authService: AuthService, private router: Router) {
+    // Suscribimos al BehaviorSubject para actualizar la UI automáticamente
     this.authService.user$.subscribe(user => this.loggedInUser = user);
   }
 
@@ -30,11 +32,17 @@ export class LoginComponent {
 
     this.authService.login({ username: this.username, password: this.password })
       .subscribe({
-        next: () => {
+        next: (res) => {
+          // login exitoso
           this.message = 'Inicio de sesión exitoso ✅';
+          // Limpiamos campos de entrada
+          this.username = '';
+          this.password = '';
+          // Redirigimos a perfil
           this.router.navigate(['/mi-perfil']);
         },
         error: err => {
+          // Manejo detallado de errores
           if (err.status === 401) this.message = '⚠️ Credenciales inválidas';
           else if (err.status === 403) this.message = '🚫 Acceso denegado';
           else if (err.status === 0) this.message = '❌ No se puede conectar con el servidor';
@@ -45,9 +53,8 @@ export class LoginComponent {
 
   logout() {
     this.authService.logout();
-    this.username = '';
-    this.password = '';
     this.message = '';
+    // Redirigimos al home
     this.router.navigate(['/home']);
   }
 }

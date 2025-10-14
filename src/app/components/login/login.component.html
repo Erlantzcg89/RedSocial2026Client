@@ -9,7 +9,7 @@
 
     <!-- 🔒 Usuario logueado -->
     <div *ngIf="loggedInUser; else loginForm">
-      <p>Bienvenido, <strong>{{ loggedInUser }}</strong></p>
+      <p>Bienvenido, <strong>{{ loggedInUser?.sub }}</strong></p>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
 
