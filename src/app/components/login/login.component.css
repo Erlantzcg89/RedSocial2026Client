@@ -15,7 +15,7 @@
 
 .login-image img {
   display: block;
-  height: 100%; /* altura = altura del contenedor */
+  height: 300px; /* altura = altura del contenedor */
   width: auto;  /* mantiene proporción */
   object-fit: cover;
 }
