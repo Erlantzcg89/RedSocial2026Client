@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./menu-principal.component.css']
 })
 export class MenuPrincipalComponent {
-  loggedIn = !!localStorage.getItem('token');
+  loggedIn = false;
 
   constructor(private authService: AuthService) {
     this.authService.user$.subscribe(user => this.loggedIn = !!user);

@@ -13,9 +13,7 @@ export interface JwtPayload {
   exp: number;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private userSubject = new BehaviorSubject<JwtPayload | null>(this.getUserFromToken());
   public user$ = this.userSubject.asObservable();
@@ -35,21 +33,23 @@ export class AuthService {
     );
   }
 
+  register(user: any): Observable<any> {
+    return this.http.post(API_URL + 'register', user);
+  }
+
+  test(): Observable<string> { return this.http.get(API_URL + 'test', { responseType: 'text' }); }
+
   logout() {
     localStorage.removeItem('token');
     this.userSubject.next(null);
   }
 
-  register(user: any): Observable<any> {
-    return this.http.post(API_URL + 'register', user);
-  }
-
-  test(): Observable<string> {
-    return this.http.get(API_URL + 'test', { responseType: 'text' });
-  }
-
   private getUserFromToken(): JwtPayload | null {
     const token = localStorage.getItem('token');
     return token ? jwtDecode<JwtPayload>(token) : null;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 }

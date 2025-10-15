@@ -54,7 +54,6 @@ export class LoginComponent {
   logout() {
     this.authService.logout();
     this.message = '';
-    // Redirigimos al home
     this.router.navigate(['/home']);
   }
 }
