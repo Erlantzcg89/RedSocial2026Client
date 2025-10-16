@@ -10,6 +10,7 @@ export interface JwtPayload {
   sub: string;  // username
   id: number;
   email: string;
+  role: string; // <--- ahora incluimos el rol
   exp: number;
 }
 
@@ -26,7 +27,6 @@ export class AuthService {
         if (res?.token) {
           localStorage.setItem('token', res.token);
           const user = jwtDecode<JwtPayload>(res.token);
-          console.log(user)
           this.userSubject.next(user);
         }
       })
@@ -34,10 +34,21 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    return this.http.post(API_URL + 'register', user);
+    return this.http.post(API_URL + 'register', user).pipe(
+      tap((res: any) => {
+        // Si la API devuelve token, loguear automáticamente
+        if (res?.token) {
+          localStorage.setItem('token', res.token);
+          const userPayload = jwtDecode<JwtPayload>(res.token);
+          this.userSubject.next(userPayload);
+        }
+      })
+    );
   }
 
-  test(): Observable<string> { return this.http.get(API_URL + 'test', { responseType: 'text' }); }
+  test(): Observable<string> {
+    return this.http.get(API_URL + 'test', { responseType: 'text' });
+  }
 
   logout() {
     localStorage.removeItem('token');

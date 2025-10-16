@@ -23,7 +23,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]] // email obligatorio
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -37,13 +37,11 @@ export class RegisterComponent {
 
     this.authService.register({ username, password, email }).subscribe({
       next: () => {
-        this.message = 'Usuario registrado exitosamente ✅';
+        this.message = 'Usuario registrado y logueado automáticamente ✅';
         this.registerForm.reset();
 
-        // ⏳ Esperar 2 segundos antes de navegar al inicio
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 2000);
+        // Navegar directamente al perfil del usuario logueado
+        this.router.navigate(['/mi-perfil']);
       },
       error: err => {
         if (err.status === 0) this.message = '❌ No se puede conectar con el servidor';
