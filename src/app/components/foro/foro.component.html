@@ -5,6 +5,6 @@
   <p *ngIf="error" style="color:red">{{ error }}</p>
 
   <div *ngFor="let cat of categorias">
-    <h3>{{ cat.nombre }}</h3>
+    <h3>{{ capitalize(cat.nombre) }}</h3>
   </div>
 </div>

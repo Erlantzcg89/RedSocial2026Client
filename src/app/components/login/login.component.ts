@@ -43,7 +43,7 @@ export class LoginComponent {
       next: () => {
         this.message = 'Inicio de sesión exitoso ✅';
         this.loginForm.reset();
-        this.router.navigate(['/mi-perfil']);
+        this.router.navigate(['/foro']);
       },
       error: err => {
         if (err.status === 401) this.message = '⚠️ Credenciales inválidas';

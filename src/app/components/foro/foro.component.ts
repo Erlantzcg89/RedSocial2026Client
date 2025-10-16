@@ -24,7 +24,8 @@ export class ForoComponent implements OnInit {
     this.loading = true;
     this.foroService.getCategorias().subscribe({
       next: (cats) => {
-        this.categorias = cats;
+        // Ordenar por id ascendente
+        this.categorias = cats.sort((a, b) => a.id - b.id);
         this.loading = false;
       },
       error: (err) => {
@@ -33,5 +34,11 @@ export class ForoComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  // Capitalizar primera letra
+  capitalize(str: string): string {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
