@@ -1,107 +1,92 @@
-/* Contenedor principal: flexbox */
-.login-container {
+/* Contenedor principal: ocupa todo el ancho, sin mostrar color del body */
+.form-page {
+  width: 100%;
   display: flex;
-  flex-direction: column; /* mobile-first: columna */
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  align-items: center;
-  background: white;
-  padding: 15px;
-  gap: 15px;
-}
-
-/* Imagen */
-.login-image {
-  width: 100%;
-}
-
-.login-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: var(--border-radius);
-}
-
-/* Formulario */
-.login-inner {
-  width: 100%;
-  text-align: center; /* centro en móvil */
-  font-size: 0.85rem;
+  justify-content: center;
   padding: 20px;
-  background-color: white;
+  box-sizing: border-box;
+  background: white; /* opcional: puedes quitarlo si quieres que herede del body */
 }
 
-.login-inner form {
+/* Contenedor interno del formulario: ancho máximo */
+.form-inner {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+    margin: 20px 0;
+  padding: 20px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.login-inner input {
+/* Inputs */
+.form-inner input {
   width: 100%;
-  margin-bottom: 10px;
-  font-size: 1rem;
   padding: 10px;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
-.login-inner button {
+/* Botón */
+.form-inner button {
   width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--text-dark);
   background: #fff;
   color: var(--text-dark);
-  border: 1px solid var(--text-dark);
-  font-size: 1rem;
-  padding: 10px;
-  cursor: pointer;
   transition: background var(--transition), color var(--transition);
 }
 
-.login-inner button:hover:not(:disabled) {
+.form-inner button:hover:not(:disabled) {
   background: var(--primary-color);
   color: var(--text-light);
   border-color: var(--primary-color);
 }
 
-.login-inner .message {
-  margin-bottom: 10px;
-  font-weight: 500;
+/* Mensajes */
+.form-inner .message {
   color: var(--primary-color);
+  font-weight: 500;
 }
 
-.login-inner a {
-  display: block;
-  margin-top: 8px;
+/* Errores */
+.form-inner .error-message {
+  color: red;
   font-size: 0.85rem;
 }
 
-/* 💻 Desktop: pantalla más grande */
+/* Links */
+.form-inner a {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.form-inner a:hover {
+  color: var(--primary-hover);
+}
+
+/* Desktop */
 @media (min-width: 768px) {
-  .login-container {
-    flex-direction: row; /* dos columnas */
-    justify-content: center;
-    align-items: stretch;
-    max-width: 800px;
-    margin: 40px auto;
+  .form-page {
     padding: 0;
-    gap: 0;
   }
 
-  .login-image {
-    width: 50%;
+  .form-inner {
     margin: 0;
-  }
-
-  .login-inner {
-    width: 50%;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 40px;
-  }
-
-  .login-inner form {
-    align-items: flex-start;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.05);
   }
 }

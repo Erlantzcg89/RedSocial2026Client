@@ -1,52 +1,92 @@
-.container {
+/* Contenedor principal: ocupa todo el ancho, sin mostrar color del body */
+.form-page {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
-  padding: 15px;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background: white; /* opcional: puedes quitarlo si quieres que herede del body */
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+/* Contenedor interno del formulario: ancho máximo */
+.form-inner {
   width: 100%;
   max-width: 400px;
-  gap: 10px;
+  background: white;
+  margin: 20px 0;
+  padding: 20px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-input {
+/* Inputs */
+.form-inner input {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
   border-radius: var(--border-radius);
   border: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
-button {
-  margin-top: 10px;
+/* Botón */
+.form-inner button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--text-dark);
   background: #fff;
   color: var(--text-dark);
-  border: 1px solid var(--text-dark);
   transition: background var(--transition), color var(--transition);
-  padding: 10px;
 }
 
-button:hover:not(:disabled) {
+.form-inner button:hover:not(:disabled) {
   background: var(--primary-color);
   color: var(--text-light);
   border-color: var(--primary-color);
 }
 
-.message {
-  margin-bottom: 15px;
-  font-weight: 500;
+/* Mensajes */
+.form-inner .message {
   color: var(--primary-color);
+  font-weight: 500;
 }
 
-/* Desktop: centrar formulario */
+/* Errores */
+.form-inner .error-message {
+  color: red;
+  font-size: 0.85rem;
+}
+
+/* Links */
+.form-inner a {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.form-inner a:hover {
+  color: var(--primary-hover);
+}
+
+/* Desktop */
 @media (min-width: 768px) {
-  .container {
-    align-items: flex-start;
+  .form-page {
+    padding: 0;
+  }
+
+  .form-inner {
+    margin: 0;
+    padding: 40px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.05);
   }
 }
