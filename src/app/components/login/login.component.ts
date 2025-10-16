@@ -58,7 +58,7 @@ export class LoginComponent {
     this.authService.logout();
     this.message = '';
     this.cabeceraService.setViewState('login');
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   showRegister(event: Event) {
