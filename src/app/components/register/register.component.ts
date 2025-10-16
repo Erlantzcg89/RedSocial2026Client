@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CabeceraService } from '../../services/cabecera.service'; // <<<< import
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private cabeceraService: CabeceraService, // <<<< inyectamos el servicio
     private router: Router
   ) {
     this.registerForm = this.fb.group({
@@ -39,8 +41,7 @@ export class RegisterComponent {
       next: () => {
         this.message = 'Usuario registrado y logueado automáticamente ✅';
         this.registerForm.reset();
-
-        // Navegar directamente al perfil del usuario logueado
+        this.cabeceraService.setViewState('login');
         this.router.navigate(['/mi-perfil']);
       },
       error: err => {
@@ -52,5 +53,11 @@ export class RegisterComponent {
         else this.message = '⚠️ Error desconocido al registrar';
       }
     });
+  }
+
+  // <<< NUEVO MÉTODO
+  showLogin(event: Event) {
+    event.preventDefault(); // evita navegación
+    this.cabeceraService.setViewState('login'); // cambia la vista a login
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, JwtPayload } from '../../services/auth.service';
+import { CabeceraService } from '../../services/cabecera.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private cabeceraService: CabeceraService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -55,6 +57,12 @@ export class LoginComponent {
   logout() {
     this.authService.logout();
     this.message = '';
-    this.router.navigate(['/home']);
+    this.cabeceraService.setViewState('login');
+    this.router.navigate(['/']);
+  }
+
+  showRegister(event: Event) {
+    event.preventDefault();       // evita la navegación
+    this.cabeceraService.setViewState('register'); // cambia la vista
   }
 }

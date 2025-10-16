@@ -1,4 +1,15 @@
 <app-banner></app-banner>
-<app-login></app-login>
+
+<!-- Mostrar Login, Register o Nada según el valor -->
+<app-login *ngIf="viewState === 'login'; else checkRegister"></app-login>
+
+<ng-template #checkRegister>
+  <app-register *ngIf="viewState === 'register'; else showNothing"></app-register>
+</ng-template>
+
+<ng-template #showNothing>
+  <!-- Aquí no mostramos ni login ni register -->
+</ng-template>
+
 <app-menu-principal></app-menu-principal>
 <router-outlet></router-outlet>
