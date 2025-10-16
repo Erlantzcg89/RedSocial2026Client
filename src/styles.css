@@ -10,6 +10,13 @@
   --container-max-width: 400px;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 /* 🌍 Estilos globales */
 body {
   font-family: 'Segoe UI', Roboto, sans-serif;
@@ -87,7 +94,7 @@ a:hover {
 /* 📱 Mobile-first: contenedores y layout */
 @media (max-width: 500px) {
   .container {
-    margin: 15px 10px;
+    margin: 0;
     padding: 15px;
     border-radius: var(--border-radius);
   }
