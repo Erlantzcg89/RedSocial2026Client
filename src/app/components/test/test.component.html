@@ -4,5 +4,5 @@
     {{ loading ? 'Conectando...' : 'Probar conexión' }}
   </button>
 
-  <p *ngIf="message">{{ message }}</p>
+  <p *ngIf="message" #mensajeBox>{{ message }}</p>
 </div>
