@@ -22,24 +22,28 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]] // email obligatorio
     });
   }
 
   register() {
     if (this.registerForm.invalid) {
-      this.message = 'Por favor, completa todos los campos';
+      this.message = 'Por favor, completa todos los campos correctamente';
       return;
     }
 
-    const { username, password } = this.registerForm.value;
+    const { username, password, email } = this.registerForm.value;
 
-    this.authService.register({ username, password }).subscribe({
+    this.authService.register({ username, password, email }).subscribe({
       next: () => {
         this.message = 'Usuario registrado exitosamente ✅';
         this.registerForm.reset();
-        // Opcional: redirigir al login automáticamente
-        // this.router.navigate(['/login']);
+
+        // ⏳ Esperar 2 segundos antes de navegar al inicio
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 2000);
       },
       error: err => {
         if (err.status === 0) this.message = '❌ No se puede conectar con el servidor';

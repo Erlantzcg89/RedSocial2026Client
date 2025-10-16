@@ -3,7 +3,17 @@
 
   <form [formGroup]="registerForm" (ngSubmit)="register()">
     <input type="text" formControlName="username" placeholder="Usuario">
+
     <input type="password" formControlName="password" placeholder="Contraseña">
+
+    <input type="email" formControlName="email" placeholder="Correo electrónico">
+
+    <!-- Mensajes de error para email -->
+    <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" style="color:red; font-size:0.85rem;">
+      <span *ngIf="registerForm.get('email')?.errors?.['required']">El correo es obligatorio.</span>
+      <span *ngIf="registerForm.get('email')?.errors?.['email']">El correo no es válido.</span>
+    </div>
+
     <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
   </form>
 </div>
