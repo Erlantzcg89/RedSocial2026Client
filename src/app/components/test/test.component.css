@@ -13,3 +13,7 @@ button:hover:not(:disabled) {
   color: var(--text-light);
   border-color: var(--primary-color);
 }
+
+p {
+  word-wrap: break-word;
+}

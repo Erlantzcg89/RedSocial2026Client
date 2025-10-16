@@ -1,57 +1,58 @@
 /* Contenedor principal: flexbox */
 .login-container {
   display: flex;
+  flex-direction: column; /* mobile-first: columna */
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  align-items: flex-start; /* altura = altura del formulario */
+  align-items: center;
   background: white;
+  padding: 15px;
+  gap: 15px;
 }
 
-/* Imagen a la izquierda ajustada a la altura del formulario */
+/* Imagen */
 .login-image {
-  margin-right: 10px; /* separa la imagen del formulario */
+  width: 100%;
 }
 
 .login-image img {
   display: block;
-  height: 300px; /* altura = altura del contenedor */
-  width: 100%;  /* mantiene proporción */
+  width: 100%;
+  height: auto;
   object-fit: cover;
+  border-radius: var(--border-radius);
 }
 
-/* Formulario a la derecha con fondo blanco */
+/* Formulario */
 .login-inner {
-  max-width: 200px;
-  margin-left: auto;       /* empuja el formulario a la derecha */
-  text-align: right;
+  width: 100%;
+  text-align: center; /* centro en móvil */
   font-size: 0.85rem;
-  padding: 20px;           /* espacio interno */
-  background-color: white; /* fondo blanco */
+  padding: 20px;
+  background-color: white;
 }
 
-/* Formulario interno */
 .login-inner form {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .login-inner input {
   width: 100%;
-  margin-bottom: 6px;
-  font-size: 0.8rem;
-  padding: 6px 8px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  padding: 10px;
 }
 
-/* Botón blanco con borde */
 .login-inner button {
   width: 100%;
   background: #fff;
   color: var(--text-dark);
   border: 1px solid var(--text-dark);
-  font-size: 0.8rem;
-  padding: 6px 8px;
+  font-size: 1rem;
+  padding: 10px;
   cursor: pointer;
   transition: background var(--transition), color var(--transition);
 }
@@ -63,15 +64,44 @@
 }
 
 .login-inner .message {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 500;
   color: var(--primary-color);
 }
 
-/* Enlaces centrados */
 .login-inner a {
   display: block;
-  text-align: center;
-  font-size: 0.75rem;
-  margin-top: 6px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+/* 💻 Desktop: pantalla más grande */
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row; /* dos columnas */
+    justify-content: center;
+    align-items: stretch;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0;
+    gap: 0;
+  }
+
+  .login-image {
+    width: 50%;
+    margin: 0;
+  }
+
+  .login-inner {
+    width: 50%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .login-inner form {
+    align-items: flex-start;
+  }
 }

@@ -28,14 +28,17 @@ h2 {
 
 /* 🧠 Layout general */
 .container {
-  max-width: 100%;              /* ocupa todo el ancho */
-  margin: 0;                    /* elimina margen exterior */
-  padding: 20px;                /* mantiene algo de espacio interior */
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
   background: white;
-  border-radius: 0;             /* elimina esquinas redondeadas */
-  box-shadow: none;             /* sin sombra */
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; /* mobile-first: columna */
+  gap: 15px;
 }
-
 
 /* 🔘 Botones comunes */
 button {
@@ -81,11 +84,12 @@ a:hover {
   color: var(--primary-hover);
 }
 
-/* 📱 Media Queries para responsive */
+/* 📱 Mobile-first: contenedores y layout */
 @media (max-width: 500px) {
   .container {
-    margin: 20px 10px;
+    margin: 15px 10px;
     padding: 15px;
+    border-radius: var(--border-radius);
   }
 
   h2 {
@@ -93,7 +97,16 @@ a:hover {
   }
 
   button, input {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 10px;
+  }
+}
+
+/* 💻 Desktop: pantallas más grandes */
+@media (min-width: 768px) {
+  .container {
+    max-width: 800px;
+    flex-direction: row; /* filas o columnas lado a lado */
+    gap: 20px;
   }
 }
