@@ -1,8 +1,7 @@
 <div class="container">
-  
-    <button (click)="loadTestMessage()" [disabled]="loading">
+  <button (click)="loadTestMessage()" [disabled]="loading">
     {{ loading ? 'Conectando...' : 'Probar conexión' }}
   </button>
 
-  <p *ngIf="message">{{ message }}</p>
+  <p #messageRef *ngIf="message">{{ message }}</p>
 </div>
