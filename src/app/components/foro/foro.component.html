@@ -1,3 +1,10 @@
 <div class="container">
   <h2>Foro</h2>
+
+  <p *ngIf="loading">Cargando categorías...</p>
+  <p *ngIf="error" style="color:red">{{ error }}</p>
+
+  <div *ngFor="let cat of categorias">
+    <h3>{{ cat.nombre }}</h3>
+  </div>
 </div>
