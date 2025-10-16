@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -13,8 +13,6 @@ export class TestComponent {
   message = '';
   loading = false;
 
-  @ViewChild('mensajeBox') mensajeBox!: ElementRef;
-
   constructor(private authService: AuthService) {}
 
   loadTestMessage() {
@@ -25,7 +23,6 @@ export class TestComponent {
       next: (res) => {
         this.message = typeof res === 'string' ? res : '✅ Conectado correctamente';
         this.loading = false;
-        this.scrollToMensaje();
       },
       error: (err) => {
         console.error('Error al conectar:', err);
@@ -41,15 +38,6 @@ export class TestComponent {
         this.loading = false;
       }
     });
-  }
-
-    private scrollToMensaje() {
-    if (this.mensajeBox) {
-      this.mensajeBox.nativeElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }
   }
   
 }
