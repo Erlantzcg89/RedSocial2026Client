@@ -1,10 +1,20 @@
 <div class="container">
-  <h2>Foro</h2>
 
-  <p *ngIf="loading">Cargando categorías...</p>
+  <p *ngIf="loading">Cargando datos...</p>
   <p *ngIf="error" style="color:red">{{ error }}</p>
 
   <div *ngFor="let cat of categorias">
     <h3>{{ capitalize(cat.nombre) }}</h3>
+
+    <ul style="list-style-type: none; padding-left: 0;">
+      <li *ngFor="let topic of getTopicsByCategoria(cat.id)">
+        <a [routerLink]="['/topic', topic.id]">
+          {{ capitalize(topic.nombre) }}
+        </a>
+      </li>
+      <li *ngIf="getTopicsByCategoria(cat.id).length === 0" style="color:gray;">
+        (Sin topics)
+      </li>
+    </ul>
   </div>
 </div>
