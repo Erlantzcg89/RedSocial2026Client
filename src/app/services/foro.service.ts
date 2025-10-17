@@ -46,4 +46,13 @@ export class ForoService {
     getMensajes(): Observable<Mensaje[]> {
     return this.http.get<Mensaje[]>(`${this.API_URL}/mensajes`);
   }
+
+    crearMensaje(contenido: string, topicId: number, usuarioId: number): Observable<Mensaje> {
+    const body = {
+      contenido,
+      topic: { id: topicId },
+      usuario: { id: usuarioId }
+    };
+    return this.http.post<Mensaje>(`${this.API_URL}/mensaje`, body);
+  }
 }
