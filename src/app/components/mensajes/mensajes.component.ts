@@ -1,6 +1,7 @@
+// mensajes.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ForoService, Mensaje, Topic, Usuario } from '../../services/foro.service';
+import { ForoService, Mensaje, Topic } from '../../services/foro.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService, JwtPayload } from '../../services/auth.service';
@@ -37,7 +38,20 @@ export class MensajesComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.topicId = +params['id'];
+      this.loadTopic();
       this.loadMensajes();
+    });
+  }
+
+  loadTopic() {
+    this.foroService.getTopicById(this.topicId).subscribe({
+      next: (topic: Topic) => {
+        this.topicNombre = this.capitalizeFirstLetter(topic.nombre);
+      },
+      error: (err) => {
+        console.error('Error al cargar topic', err);
+        this.topicNombre = 'Topic desconocido';
+      }
     });
   }
 
@@ -46,9 +60,8 @@ export class MensajesComponent implements OnInit {
     this.error = '';
 
     this.foroService.getMensajes().subscribe({
-      next: (msgs) => {
+      next: (msgs: Mensaje[]) => {
         this.mensajes = msgs.filter(m => m.topic.id === this.topicId);
-        this.topicNombre = this.mensajes.length > 0 ? this.mensajes[0].topic.nombre : 'Topic sin mensajes';
         this.loading = false;
       },
       error: (err) => {
@@ -71,8 +84,8 @@ export class MensajesComponent implements OnInit {
 
     this.foroService.crearMensaje(contenido, this.topicId, this.user.id).subscribe({
       next: (mensaje: Mensaje) => {
-        this.mensajes.push(mensaje); // agregar al listado
-        this.nuevoMensajeForm.reset(); // limpiar input
+        this.mensajes.push(mensaje); 
+        this.nuevoMensajeForm.reset(); 
       },
       error: (err) => {
         console.error('Error al crear mensaje', err);
@@ -80,4 +93,11 @@ export class MensajesComponent implements OnInit {
       }
     });
   }
+
+  capitalizeFirstLetter(str: string): string {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+}
+

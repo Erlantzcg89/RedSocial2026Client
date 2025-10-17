@@ -1,3 +1,4 @@
+<!-- mensajes.component.html -->
 <div class="container">
   <h3>{{ topicNombre}}</h3>
 
@@ -14,7 +15,6 @@
     </div>
   </div>
 
-  <!-- Formulario para nuevo mensaje -->
   <div class="card nuevo-mensaje">
     <form [formGroup]="nuevoMensajeForm" (ngSubmit)="crearMensaje()">
       <textarea formControlName="contenido" placeholder="" rows="3"></textarea>

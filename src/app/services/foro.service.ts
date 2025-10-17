@@ -43,6 +43,10 @@ export class ForoService {
     return this.http.get<Topic[]>(`${this.API_URL}/topics`);
   }
 
+  getTopicById(id: number): Observable<Topic> {
+  return this.http.get<Topic>(`${this.API_URL}/topics/${id}`);
+}
+
     getMensajes(): Observable<Mensaje[]> {
     return this.http.get<Mensaje[]>(`${this.API_URL}/mensajes`);
   }
