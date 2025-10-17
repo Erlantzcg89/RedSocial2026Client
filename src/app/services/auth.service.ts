@@ -50,10 +50,6 @@ export class AuthService {
     );
   }
 
-  test(): Observable<string> {
-    return this.http.get(API_URL + 'test', { responseType: 'text' });
-  }
-
   logout() {
     localStorage.removeItem('token');
     this.userSubject.next(null);
