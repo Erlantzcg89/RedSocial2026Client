@@ -41,7 +41,7 @@ export class LoginComponent {
 
     this.authService.login({ username, password }).subscribe({
       next: () => {
-        this.message = 'Inicio de sesión exitoso ✅';
+        this.message = ''; //Inicio de sesión exitoso ✅
         this.loginForm.reset();
         this.router.navigate(['/foro']);
       },

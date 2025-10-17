@@ -6,11 +6,11 @@
 
 /* Enlaces no visitados */
 a:link {
-  color: var(--primary-color);
+  color: rgb(29, 147, 184);
 }
 
 a:visited {
-  color: var(--primary-color);
+  color: rgb(29, 147, 184);
 }
 
 /* Enlaces al pasar el mouse */
