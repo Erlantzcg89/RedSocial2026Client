@@ -15,5 +15,6 @@ a:visited {
 
 /* Enlaces al pasar el mouse */
 a:hover {
-  color: var(--primary-dark);
+  color: rgb(55, 55, 184);
+  text-decoration: underline;
 }

@@ -1,0 +1,37 @@
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: background var(--transition), color var(--transition);
+}
+
+.footer-text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-link {
+  color: var(--text-dark);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    font-size: 1rem;
+    padding: 25px;
+  }
+}
