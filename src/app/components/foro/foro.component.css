@@ -3,3 +3,13 @@
   padding-left: 0;
   margin: 0; /* opcional, para quitar el margen */
 }
+
+/* Enlaces no visitados */
+a:link {
+  color: var(--primary-color);
+}
+
+/* Enlaces al pasar el mouse */
+a:hover {
+  color: var(--primary-hover);
+}
