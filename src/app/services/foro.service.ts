@@ -7,6 +7,12 @@ export interface Categoria {
   nombre: string;
 }
 
+export interface Topic {
+  id: number;
+  nombre: string;
+  categoria: Categoria;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ForoService {
   private readonly API_URL = 'http://localhost:8080/api/foro';
@@ -15,5 +21,9 @@ export class ForoService {
 
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.API_URL}/categorias`);
+  }
+
+    getTopics(): Observable<Topic[]> {
+    return this.http.get<Topic[]>(`${this.API_URL}/topics`);
   }
 }
