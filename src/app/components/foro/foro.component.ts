@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForoService, Categoria, Topic } from '../../services/foro.service';
+import { ForoService, Categoria, Topic, Mensaje } from '../../services/foro.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 export class ForoComponent implements OnInit {
   categorias: Categoria[] = [];
   topics: Topic[] = [];
+  mensajes: Mensaje[] = [];
   loading = false;
   error = '';
 
@@ -22,15 +23,15 @@ export class ForoComponent implements OnInit {
     this.loadData();
   }
 
+  // Cargar categorías, topics y mensajes
   loadData() {
     this.loading = true;
     this.error = '';
 
-    // Cargar categorías y topics en paralelo
     this.foroService.getCategorias().subscribe({
       next: (cats) => {
         this.categorias = cats.sort((a, b) => a.id - b.id);
-        this.loadTopics();
+        this.loadTopicsYMensajes();
       },
       error: (err) => {
         console.error('Error al cargar categorías', err);
@@ -40,12 +41,23 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  loadTopics() {
+  loadTopicsYMensajes() {
     this.foroService.getTopics().subscribe({
       next: (topics) => {
-        // Orden descendente por id
         this.topics = topics.sort((a, b) => b.id - a.id);
-        this.loading = false;
+
+        // Luego cargamos los mensajes
+        this.foroService.getMensajes().subscribe({
+          next: (mensajes) => {
+            this.mensajes = mensajes;
+            this.loading = false;
+          },
+          error: (err) => {
+            console.error('Error al cargar mensajes', err);
+            this.error = 'No se pudieron cargar los mensajes';
+            this.loading = false;
+          }
+        });
       },
       error: (err) => {
         console.error('Error al cargar topics', err);
@@ -58,6 +70,11 @@ export class ForoComponent implements OnInit {
   // Obtener los topics de una categoría
   getTopicsByCategoria(catId: number): Topic[] {
     return this.topics.filter(t => t.categoria.id === catId);
+  }
+
+  // Contar los mensajes asociados a un topic
+  getMensajesCountByTopic(topicId: number): number {
+    return this.mensajes.filter(m => m.topic.id === topicId).length;
   }
 
   // Capitalizar primera letra
