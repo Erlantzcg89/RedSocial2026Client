@@ -6,6 +6,11 @@
   margin: auto;
 }
 
+h3 {
+  color: #1d93b8;
+  margin-bottom: 0;
+}
+
 .card {
   border: 1px solid #ddd;
   border-radius: var(--border-radius);

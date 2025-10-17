@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>{{ topicNombre | titlecase }}</h3>
+  <h3>{{ topicNombre}}</h3>
 
   <p *ngIf="loading">Cargando mensajes...</p>
   <p *ngIf="error" style="color:red">{{ error }}</p>
@@ -7,7 +7,7 @@
 
   <div *ngFor="let msg of mensajes" class="card">
     <div class="card-header">
-      <strong>{{ msg.usuario.username }}</strong> - <small>{{ formatDate(msg.date) }}</small>
+      {{ msg.usuario.username }} - <small>{{ formatDate(msg.date) }}</small>
     </div>
     <div class="card-body">
       {{ msg.contenido }}

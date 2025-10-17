@@ -1,20 +1,66 @@
-.container ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0; /* opcional, para quitar el margen */
+.container {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  margin: 1rem auto;
+  max-width: 800px;
 }
 
-/* Enlaces no visitados */
-a:link {
-  color: rgb(29, 147, 184);
+.categoria {
+  margin-bottom: 2rem;
 }
 
+h3 {
+  color: #1d93b8;
+
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.tabla-topics {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tabla-topics th,
+.tabla-topics td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.tabla-topics th {
+  background-color: #f4f8fb;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabla-topics tr:hover {
+  background-color: #f9fcff;
+}
+
+.mensajes-col {
+  text-align: center;
+  width: 120px;
+  color: #555;
+}
+
+a:link,
 a:visited {
   color: rgb(29, 147, 184);
+  text-decoration: none;
 }
 
-/* Enlaces al pasar el mouse */
 a:hover {
   color: rgb(55, 55, 184);
   text-decoration: underline;
+}
+
+.sin-topics {
+  color: gray;
+  font-style: italic;
+  padding-left: 1rem;
+}
+
+.error {
+  color: red;
 }
