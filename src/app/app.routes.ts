@@ -6,12 +6,14 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { ForoComponent } from './components/foro/foro.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TestComponent } from './components/test/test.component';
+import { MensajesComponent } from './components/mensajes/mensajes.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'mi-perfil', component: MiPerfilComponent, canActivate: [AuthGuard]  },
   { path: 'foro', component: ForoComponent, canActivate: [AuthGuard]  },
+  { path: 'foro/mensajes/:id', component: MensajesComponent, canActivate: [AuthGuard]  },
   { path: 'test', component: TestComponent, canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '' }  // redirige rutas no existentes al home
 ];

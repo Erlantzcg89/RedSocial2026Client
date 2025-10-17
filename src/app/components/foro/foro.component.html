@@ -8,7 +8,7 @@
 
     <ul style="list-style-type: none; padding-left: 0;">
       <li *ngFor="let topic of getTopicsByCategoria(cat.id)">
-        <a [routerLink]="['/topic', topic.id]">
+        <a [routerLink]="['/foro/mensajes', topic.id]">
           {{ capitalize(topic.nombre) }}
         </a>
       </li>
