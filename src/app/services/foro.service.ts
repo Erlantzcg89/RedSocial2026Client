@@ -59,4 +59,12 @@ export class ForoService {
     };
     return this.http.post<Mensaje>(`${this.API_URL}/mensaje`, body);
   }
+
+    crearTopic(nombre: string, categoriaId: number): Observable<Topic> {
+    const body = {
+      nombre,
+      categoria: { id: categoriaId }
+    };
+    return this.http.post<Topic>(`${this.API_URL}/topic`, body);
+  }
 }
