@@ -2,7 +2,7 @@
   <div class="form-inner">
 
     <div *ngIf="loggedInUser; else loginFormTemplate">
-      <p>Bienvenido, <strong>{{ loggedInUser?.sub }}</strong></p>
+      <p>Bienvenido, <strong>{{ loggedInUser.sub }}</strong></p>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
 
