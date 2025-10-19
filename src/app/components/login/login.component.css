@@ -19,7 +19,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -68,7 +68,6 @@
 /* Links */
 .form-inner a {
   display: block;
-  margin-top: 10px;
   font-size: 0.85rem;
   color: var(--text-dark);
   text-decoration: none;
