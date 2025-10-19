@@ -18,7 +18,7 @@
   <div class="card nuevo-mensaje">
     <form [formGroup]="nuevoMensajeForm" (ngSubmit)="crearMensaje()">
       <textarea formControlName="contenido" placeholder="" rows="3"></textarea>
-      <button type="submit" [disabled]="nuevoMensajeForm.invalid">Enviar mensaje</button>
+      <button type="submit" [disabled]="nuevoMensajeForm.invalid">Nuevo mensaje</button>
     </form>
   </div>
 </div>

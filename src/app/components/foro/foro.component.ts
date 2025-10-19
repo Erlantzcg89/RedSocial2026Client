@@ -1,12 +1,15 @@
+// foro.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router'; // 👈 añadimos Router
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ForoService, Categoria, Topic, Mensaje } from '../../services/foro.service';
-import { RouterLink } from '@angular/router';
+import { AuthService, JwtPayload } from '../../services/auth.service';
 
 @Component({
   selector: 'app-foro',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './foro.component.html',
   styleUrls: ['./foro.component.css']
 })
@@ -16,14 +19,30 @@ export class ForoComponent implements OnInit {
   mensajes: Mensaje[] = [];
   loading = false;
   error = '';
+  topicMensaje = '';
+  user: JwtPayload | null = null;
 
-  constructor(private foroService: ForoService) {}
+  nuevoTopicForm!: FormGroup;
+
+  constructor(
+    private foroService: ForoService,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router // 👈 añadimos Router
+  ) {
+    this.nuevoTopicForm = this.fb.group({
+      nombre: ['', Validators.required],
+      categoriaId: [1, Validators.required],
+      primerMensaje: ['', Validators.required]
+    });
+
+    this.authService.user$.subscribe(user => this.user = user);
+  }
 
   ngOnInit() {
     this.loadData();
   }
 
-  // Cargar categorías, topics y mensajes
   loadData() {
     this.loading = true;
     this.error = '';
@@ -45,8 +64,6 @@ export class ForoComponent implements OnInit {
     this.foroService.getTopics().subscribe({
       next: (topics) => {
         this.topics = topics.sort((a, b) => b.id - a.id);
-
-        // Luego cargamos los mensajes
         this.foroService.getMensajes().subscribe({
           next: (mensajes) => {
             this.mensajes = mensajes;
@@ -67,19 +84,55 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  // Obtener los topics de una categoría
   getTopicsByCategoria(catId: number): Topic[] {
     return this.topics.filter(t => t.categoria.id === catId);
   }
 
-  // Contar los mensajes asociados a un topic
   getMensajesCountByTopic(topicId: number): number {
     return this.mensajes.filter(m => m.topic.id === topicId).length;
   }
 
-  // Capitalizar primera letra
   capitalize(str: string): string {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  // 🔥 Crear topic y su primer mensaje
+  crearTopic() {
+    if (this.nuevoTopicForm.invalid || !this.user) return;
+
+    const { nombre, categoriaId, primerMensaje } = this.nuevoTopicForm.value;
+    this.loading = true;
+    this.topicMensaje = '';
+
+    this.foroService.crearTopic(nombre, categoriaId).subscribe({
+      next: (nuevoTopic) => {
+        // 1️⃣ Insertar el topic en la lista
+        this.topics.unshift(nuevoTopic);
+
+        // 2️⃣ Crear el primer mensaje
+        this.foroService.crearMensaje(primerMensaje, nuevoTopic.id, this.user!.id).subscribe({
+          next: (mensaje) => {
+            this.mensajes.push(mensaje);
+            this.topicMensaje = '✅ Topic y primer mensaje creados con éxito';
+            this.nuevoTopicForm.reset({ categoriaId: 1 });
+            this.loading = false;
+
+            // 🚀 3️⃣ Navegar automáticamente al componente de mensajes
+            this.router.navigate(['/foro/mensajes', nuevoTopic.id]);
+          },
+          error: (err) => {
+            console.error('Error al crear primer mensaje', err);
+            this.topicMensaje = '⚠️ Topic creado, pero no se pudo crear el primer mensaje';
+            this.loading = false;
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al crear topic', err);
+        this.topicMensaje = '❌ Error al crear topic';
+        this.loading = false;
+      }
+    });
   }
 }

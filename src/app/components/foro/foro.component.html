@@ -30,4 +30,40 @@
       <p class="sin-topics">(Sin topics)</p>
     </ng-template>
   </div>
+
+  <!-- 🧾 Formulario para crear un nuevo topic -->
+<div class="card nuevo-topic">
+
+  <h3>Nuevo tema</h3>
+
+  <form [formGroup]="nuevoTopicForm" (ngSubmit)="crearTopic()">
+
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" formControlName="categoriaId">
+      <option *ngFor="let cat of categorias" [value]="cat.id">
+        {{ capitalize(cat.nombre) }}
+      </option>
+    </select>
+
+    <input
+      type="text"
+      formControlName="nombre"
+      placeholder="Nombre del nuevo tema"
+    />
+
+    <!-- 🗨️ Nuevo campo: primer mensaje -->
+    <textarea
+      formControlName="primerMensaje"
+      placeholder="Nuevo mensaje"
+      rows="3"
+    ></textarea>
+
+    <button type="submit" [disabled]="nuevoTopicForm.invalid || loading">
+      Nuevo tema
+    </button>
+
+    <p *ngIf="topicMensaje" class="mensaje">{{ topicMensaje }}</p>
+  </form>
+</div>
+
 </div>
