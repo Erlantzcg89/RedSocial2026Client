@@ -31,7 +31,7 @@ export interface Mensaje {
 
 @Injectable({ providedIn: 'root' })
 export class ForoService {
-  private readonly API_URL = 'http://localhost:8080/api/foro';
+  private readonly API_URL = 'http://192.168.1.130:8080/api/foro';
 
   constructor(private http: HttpClient) {}
 

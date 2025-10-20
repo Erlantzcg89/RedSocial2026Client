@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const API_URL = 'http://192.168.1.130:8080/api/auth/';
 
 export interface JwtPayload {
   sub: string;
