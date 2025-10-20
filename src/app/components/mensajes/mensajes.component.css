@@ -7,7 +7,7 @@
 }
 
 h3 {
-  color: #1d93b8;
+  /* color: #1d93b8; */
   margin-bottom: 0;
 }
 
@@ -57,6 +57,7 @@ h3 {
   background-color: var(--primary-hover);
 }
 
-/* .nuevo-mensaje button:disabled {
-
-} */
+.nuevo-mensaje button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

@@ -1,20 +1,30 @@
+/* 🎯 ForoComponent - Estilo unificado con el resto de la app */
+
+/* Contenedor general */
 .container {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  margin: 1rem auto;
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f9f9f9;
 }
 
+/* Títulos */
 h3 {
-  color: #1d93b8;
-
-  padding-bottom: 0.3rem;
-  margin-bottom: 1rem;
+  /* color: #1d93b8; */
+  margin-bottom: 10px;
+  text-align: left;
 }
 
+/* Tabla de topics */
 .tabla-topics {
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .tabla-topics th,
@@ -25,70 +35,81 @@ h3 {
 }
 
 .tabla-topics th {
-  background-color: #f4f8fb;
+  background-color: #f9f9f9;
   font-weight: 600;
-  color: #333;
+  color: var(--text-dark);
+}
+
+.tabla-topics tr{
+  background-color: #f9f9f9;
 }
 
 .tabla-topics tr:hover {
-  background-color: #f9fcff;
+  background-color: #f9f9f9;
 }
 
+/* Columna mensajes */
 .mensajes-col {
   text-align: center;
   width: 120px;
   color: #555;
 }
 
-a:link,
-a:visited {
-  color: rgb(29, 147, 184);
+/* Enlaces */
+a {
+  color: var(--primary-color);
   text-decoration: none;
+  transition: color var(--transition);
 }
 
 a:hover {
-  color: rgb(55, 55, 184);
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
+/* Mensaje sin topics */
 .sin-topics {
   color: gray;
   font-style: italic;
   padding-left: 1rem;
 }
 
+/* Mensaje de error */
 .error {
   color: red;
 }
 
+/* --- Formulario de nuevo tema --- */
 .nuevo-topic {
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  max-width: 600px;
-  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.nuevo-topic h4 {
-  color: var(--primary-color);
+.nuevo-topic h3 {
+  /* color: #1d93b8; */
   margin-bottom: 10px;
 }
 
-.nuevo-topic select {
-  margin-top: 6px;
-}
-
 .nuevo-topic select,
-.nuevo-topic input {
+.nuevo-topic input,
+.nuevo-topic textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 12px;
   border-radius: var(--border-radius);
   border: 1px solid #ddd;
   font-size: 1rem;
   box-sizing: border-box;
+}
+
+.nuevo-topic textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
 .nuevo-topic button {
@@ -103,24 +124,44 @@ a:hover {
   transition: background var(--transition);
 }
 
-/* El textarea (primer mensaje) ocupará todo el ancho, igual que en mensajes.component */
-.nuevo-topic textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: var(--border-radius);
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  font-size: 1rem;
-  resize: vertical;
-  margin-bottom: 12px;
-}
-
 .nuevo-topic button:hover:not(:disabled) {
   background-color: var(--primary-hover);
 }
 
+.nuevo-topic button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Mensaje de éxito */
 .mensaje {
   text-align: center;
   color: var(--primary-color);
   margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* 📱 Mobile-first (por defecto es columna) */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .tabla-topics th,
+  .tabla-topics td {
+    padding: 0.5rem;
+  }
+}
+
+/* 💻 Pantallas grandes (mantiene UNA COLUMNA) */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: column; /* se mantiene en columna */
+    max-width: 700px;
+  }
+
+  .nuevo-topic {
+    max-width: 600px;
+    margin: auto;
+  }
 }
